@@ -29,176 +29,186 @@
             </section>
 
             <!-- ============ РАЗДЕЛ: ТЕОРИЯ ============ -->
-            <!-- Убран текст "Основы финансовых вычислений" -->
-            <section data-menu-title="Раздел: Теория" data-transition="zoom">
+            <section id="theory-section" data-menu-title="Раздел: Теория" data-transition="zoom">
                 <h1 class="neon-text">ТЕОРИЯ</h1>
             </section>
 
-            <section data-markdown="./slides/definitions.md" data-menu-title="Определения" data-transition="convex"></section>
-            <section data-markdown="./slides/simple-accrual.md" data-menu-title="Простые: наращение" data-transition="convex"></section>
-            <section data-markdown="./slides/simple-discount.md" data-menu-title="Простые: дисконтирование" data-transition="concave"></section>
-            <section data-markdown="./slides/compound-accrual.md" data-menu-title="Сложные: наращение" data-transition="zoom"></section>
-            
-            <!-- Плавный переход к практикам (fade) -->
-            <section data-markdown="./slides/compound-discount.md" data-menu-title="Сложные: дисконтирование" data-transition="fade"></section>
-            <section data-markdown="./slides/three-practices.md" data-menu-title="Три практики начисления" data-transition="fade"></section>
+            <section id="theory-def" data-markdown="./slides/definitions.md" data-menu-title="Определения" data-transition="convex"></section>
+            <section id="theory-simple-acc" data-markdown="./slides/simple-accrual.md" data-menu-title="Простые: наращение" data-transition="convex"></section>
+            <section id="theory-simple-disc" data-markdown="./slides/simple-discount.md" data-menu-title="Простые: дисконтирование" data-transition="concave"></section>
+            <section id="theory-compound-acc" data-markdown="./slides/compound-accrual.md" data-menu-title="Сложные: наращение" data-transition="zoom"></section>
+            <section id="theory-compound-disc" data-markdown="./slides/compound-discount.md" data-menu-title="Сложные: дисконтирование" data-transition="fade"></section>
+            <section id="theory-three" data-markdown="./slides/three-practices.md" data-menu-title="Три практики начисления" data-transition="fade"></section>
 
             <!-- ============ РАЗДЕЛ: ПРИМЕРЫ ============ -->
-            <section data-menu-title="Раздел: Примеры" data-transition="zoom">
+            <section id="examples-section" data-menu-title="Раздел: Примеры" data-transition="zoom">
                 <h1 class="neon-text">ПРИМЕРЫ</h1>
                 <p class="fragment fade-up" style="color: var(--tn-muted); font-size: 1.2em;">Практические расчёты и задачи</p>
             </section>
 
-            <!-- Примеры (2–12) -->
-            <section data-menu-title="Простые: наращение (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 2: Простые проценты: Наращение -->
+            <!-- Убедись, что файл slides/example2.md содержит задачу про простые проценты и наращение -->
+            <section id="ex2-title" data-menu-title="2. Простые: наращение (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex2-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Простые проценты: Наращение</h3>
                 </div>
             </section>
-            <section data-menu-title="Простые: наращение (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex2-solution" data-menu-title="2. Простые: наращение (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex2-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="2" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Простые: дисконтирование (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 3: Простые проценты: Дисконтирование -->
+            <section id="ex3-title" data-menu-title="3. Простые: дисконтирование (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex3-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Простые проценты: Дисконтирование</h3>
                 </div>
             </section>
-            <section data-menu-title="Простые: дисконтирование (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex3-solution" data-menu-title="3. Простые: дисконтирование (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex3-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="3" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Сложные: наращение (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 4: Сложные проценты: Наращение -->
+            <section id="ex4-title" data-menu-title="4. Сложные: наращение (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex4-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Сложные проценты: Наращение</h3>
                 </div>
             </section>
-            <section data-menu-title="Сложные: наращение (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex4-solution" data-menu-title="4. Сложные: наращение (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex4-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="4" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Сложные: дисконтирование (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 5: Сложные проценты: Дисконтирование -->
+            <section id="ex5-title" data-menu-title="5. Сложные: дисконтирование (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex5-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Сложные проценты: Дисконтирование</h3>
                 </div>
             </section>
-            <section data-menu-title="Сложные: дисконтирование (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex5-solution" data-menu-title="5. Сложные: дисконтирование (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex5-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="5" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Смешанный метод (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 6: Смешанный метод -->
+            <section id="ex6-title" data-menu-title="6. Смешанный метод (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex6-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Смешанный метод начисления</h3>
                 </div>
             </section>
-            <section data-menu-title="Смешанный метод (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex6-solution" data-menu-title="6. Смешанный метод (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex6-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="6" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Эквивалентность ставок (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 7: Эквивалентность ставок -->
+            <section id="ex7-title" data-menu-title="7. Эквивалентность ставок (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex7-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Эквивалентность процентных ставок</h3>
                 </div>
             </section>
-            <section data-menu-title="Эквивалентность ставок (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex7-solution" data-menu-title="7. Эквивалентность ставок (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex7-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="7" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Средние ставки (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 8: Средние ставки -->
+            <section id="ex8-title" data-menu-title="8. Средние ставки (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex8-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Средние процентные ставки</h3>
                 </div>
             </section>
-            <section data-menu-title="Средние ставки (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex8-solution" data-menu-title="8. Средние ставки (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex8-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="8" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Эффективная ставка (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 9: Эффективная ставка -->
+            <section id="ex9-title" data-menu-title="9. Эффективная ставка (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex9-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Эффективная ставка</h3>
                 </div>
             </section>
-            <section data-menu-title="Эффективная ставка (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex9-solution" data-menu-title="9. Эффективная ставка (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex9-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="9" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Учёт инфляции (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 10: Учёт инфляции -->
+            <section id="ex10-title" data-menu-title="10. Учёт инфляции (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex10-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Учёт инфляции</h3>
                 </div>
             </section>
-            <section data-menu-title="Учёт инфляции (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex10-solution" data-menu-title="10. Учёт инфляции (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex10-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="10" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="Аннуитеты (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 11: Аннуитеты -->
+            <section id="ex11-title" data-menu-title="11. Аннуитеты (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex11-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Потоки платежей (Аннуитеты)</h3>
                 </div>
             </section>
-            <section data-menu-title="Аннуитеты (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex11-solution" data-menu-title="11. Аннуитеты (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex11-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="11" class="example-content"></div>
                 </div>
             </section>
 
-            <section data-menu-title="NPV (пример)" data-auto-animate data-transition="fade">
+            <!-- Пример 12: NPV -->
+            <section id="ex12-title" data-menu-title="12. NPV (Условие)" data-auto-animate data-transition="fade">
                 <div data-id="ex12-box" class="glass-panel" style="display:block; width:fit-content; margin:0 auto; padding:20px 44px;">
                     <h3 style="margin:0; color: var(--tn-purple); white-space:nowrap; font-weight:bold;">Чистый приведённый доход (NPV)</h3>
                 </div>
             </section>
-            <section data-menu-title="NPV (решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
+            <section id="ex12-solution" data-menu-title="12. NPV (Решение)" data-auto-animate data-transition="none" data-auto-animate-duration="0.9">
                 <div data-id="ex12-box" class="example-glass" style="display:block; width:fit-content; max-width:90%; margin:0 auto; padding:40px 60px;">
                     <div data-example-content="12" class="example-content"></div>
                 </div>
             </section>
 
             <!-- ============ РАЗДЕЛ: ПРОГРАММЫ ============ -->
-            <section data-menu-title="Раздел: Программы" data-transition="zoom">
+            <section id="programs-section" data-menu-title="Раздел: Программы" data-transition="zoom">
                 <h1 class="neon-text">ПРОГРАММЫ</h1>
             </section>
 
-            <section data-markdown="./slides/day-table.md" data-menu-title="Таблица дней года" data-transition="slide"></section>
+            <section id="prog-day-table" data-markdown="./slides/day-table.md" data-menu-title="Таблица дней года" data-transition="slide"></section>
 
-            <!-- Генератор таблицы (на весь экран) -->
-            <section data-menu-title="Генератор таблицы (демо)" style="padding:0; height:100%;" data-transition="fade">
+            <section id="prog-generator" data-menu-title="Генератор таблицы (демо)" style="padding:0; height:100%;" data-transition="fade">
                 <iframe src="day-table-generator.html" title="Генератор таблицы дней года"
                         style="width:100%; height:100%; border:none; display:block; position:absolute; top:0; left:0; z-index:10;"></iframe>
             </section>
 
-            <!-- Калькулятор загружается из отдельного файла -->
-            <section data-menu-title="Калькулятор кредита" data-transition="fade">
+            <section id="prog-calculator" data-menu-title="Калькулятор кредита" data-transition="fade">
                 <iframe src="credit-calculator.html?embedded=1"
                         title="Калькулятор кредита"
                         style="width:100%; height:560px; border:0; display:block;"></iframe>
             </section>
 
-            <section data-markdown="./slides/source-code.md" data-menu-title="Исходный код" data-transition="convex" class="compact-code"></section>
+            <section id="prog-source" data-markdown="./slides/source-code.md" data-menu-title="Исходный код" data-transition="convex" class="compact-code"></section>
 
-            <section data-markdown="./slides/funny1.md" data-menu-title="Шутка 1" data-transition="fade"></section>
-            <section data-markdown="./slides/funny2.md" data-menu-title="Шутка 2" data-transition="zoom"></section>
-            <section data-markdown="./slides/funny3.md" data-menu-title="Шутка 3" data-transition="concave"></section>
+            <!-- Шутки -->
+            <section id="joke-1" data-markdown="./slides/funny1.md" data-menu-title="Шутка 1" data-transition="fade"></section>
+            <section id="joke-2" data-markdown="./slides/funny2.md" data-menu-title="Шутка 2" data-transition="zoom"></section>
+            <section id="joke-3" data-markdown="./slides/funny3.md" data-menu-title="Шутка 3" data-transition="concave"></section>
+            <section id="joke-4" data-markdown="./slides/meme-procenty.md" data-menu-title="Шутка: два процента" data-transition="fade"></section>
+            <section id="joke-5" data-markdown="./slides/meme-dengi.md" data-menu-title="Шутка: подсчёт денег" data-transition="fade"></section>
+            <section id="joke-6" data-markdown="./slides/meme-uslozhnyat.md" data-menu-title="Шутка: не усложнять" data-transition="fade"></section>
 
             <!-- ============ РАЗДЕЛ: ЗАКЛЮЧЕНИЕ ============ -->
-            <section data-menu-title="Раздел: Заключение" data-transition="zoom">
+            <section id="conclusion-section" data-menu-title="Раздел: Заключение" data-transition="zoom">
                 <h1 class="neon-text">ЗАКЛЮЧЕНИЕ</h1>
                 <p class="fragment fade-up" style="color: var(--tn-muted); font-size: 1.2em;">Спасибо за внимание!</p>
             </section>
@@ -266,7 +276,7 @@
                     if (!res.ok) throw new Error('HTTP ' + res.status);
                     el.innerHTML = marked.parse(await res.text());
                 } catch (err) {
-                    el.innerHTML = '<p style="color:#fb4934; font-weight:bold;">Не удалось загрузить пример ' + idx + ' (' + err.message + ')</p>';
+                    el.innerHTML = '<p style="color:#fb4934; font-weight:bold;">Не удалось загрузить пример ' + idx + ' (' + err.message + ').<br>Проверьте, существует ли файл <code>./slides/example' + idx + '.md</code></p>';
                 }
             }));
         }
