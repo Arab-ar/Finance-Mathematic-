@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программа расчёта кредита</title>
+    <link rel="stylesheet" href="./css/calculator.css">
+    <script>
+        if (new URLSearchParams(location.search).has('embedded')) {
+            document.documentElement.classList.add('embedded');
+        }
+    </script>
+    <style>
+        /* Дополнительное оформление калькулятора и режима слайда. */
+        .loan-input-group label, .loan-select-col label { color: #c0caf5; }
+        .calc-hint { color: #c0caf5; font-size: 0.8em; margin: 8px 0 0; }
+        html.embedded, html.embedded body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+        html.embedded body.standalone-page { min-height: 0; font-size: 14px; }
+        html.embedded .back-link { display: none; }
+        html.embedded .loan-calc-container { box-sizing: border-box; width: 96%; gap: 20px; padding: 12px 18px; }
+        html.embedded .loan-inputs { gap: 5px; }
+        html.embedded .loan-big-input, html.embedded .loan-select { box-sizing: border-box; padding: 5px 8px; }
+        html.embedded .loan-results { padding: 14px; }
+        html.embedded .loan-results h3 { margin: 0 0 8px; }
+        html.embedded .loan-result-item { padding-top: 4px; padding-bottom: 4px; }
+        html.embedded .calc-hint { margin: 4px 0 0; }
+    </style>
+</head>
+<body class="standalone-page">
+    <a href="index.html" class="back-link">← Вернуться к презентации</a>
+    <div class="loan-calc-container">
+        <div class="loan-inputs">
+            <div class="loan-input-group"><label for="calc-p">Сумма кредита P (руб.)</label><input type="number" id="calc-p" value="100000" min="0.01" step="0.01" class="loan-big-input"></div>
+            <div class="loan-input-group"><label for="calc-i">Ставка i (% годовых)</label><div class="loan-input-rate"><input type="number" id="calc-i" value="12" min="0" step="0.1" class="loan-big-input"><span>%</span></div></div>
+            <div class="loan-input-group"><label for="calc-start">Дата начала</label><input type="date" id="calc-start" value="2025-01-31" class="loan-big-input"></div>
+            <div class="loan-input-group"><label for="calc-end">Дата окончания</label><input type="date" id="calc-end" value="2025-03-03" class="loan-big-input"></div>
+            <div class="loan-selects-row">
+                <div class="loan-select-col" style="flex:1.5"><label for="calc-practice">Практика начисления</label><select id="calc-practice" class="loan-select"><option value="30E/360">Германская — 30E/360</option><option value="ACT/360">Французская — ACT/360</option><option value="ACT/ACT">Английская — ACT/ACT</option></select></div>
+                <div class="loan-select-col" style="flex:1"><label for="calc-type">Вид процентов</label><select id="calc-type" class="loan-select"><option value="simple">Простые</option><option value="compound">Сложные</option></select></div>
+            </div>
+            <p class="calc-hint">Срок: от 30 фактических дней до 10 календарных лет.</p>
+        </div>
+        <div class="loan-results">
+            <h3>Результаты расчёта</h3>
+            <div class="loan-monthly"><span>Наращенная сумма S</span><strong id="res-s" aria-live="polite">—</strong></div>
+            <div class="loan-result-list">
+                <div class="loan-result-item"><span>Первоначальная сумма P</span><strong id="res-p">—</strong></div>
+                <div class="loan-result-item"><span>Сумма процентов I</span><strong id="res-i">—</strong></div>
+                <div class="loan-result-item"><span>Фактическое число дней</span><strong id="res-actual-days">—</strong></div>
+                <div class="loan-result-item"><span>Дней по практике</span><strong id="res-practice-days">—</strong></div>
+                <div class="loan-result-item"><span>Срок в годах n</span><strong id="res-n">—</strong></div>
+            </div>
+            <div class="loan-progress-bar"><div class="loan-progress-fill" id="res-progress" style="width:0%"></div></div>
+            <p class="calc-hint">Один платёж в конце срока, без комиссий и промежуточных платежей.</p>
+        </div>
+    </div>
+    <script>
+        'use strict';
+        const DAY_MS = 86400000;
+
+        function parseDate(value) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error('Укажите корректные даты');
+            const [year, month, day] = value.split('-').map(Number);
+            if (year < 1900 || year > 9999) throw new Error('Год должен быть от 1900 до 9999');
+            const date = new Date(Date.UTC(year, month - 1, day));
+            if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) throw new Error('Укажите корректные даты');
+            return date;
+        }
+        function leap(year) { return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0); }
+        function actualDays(start, end) { return Math.round((end - start) / DAY_MS); }
+        // Европейский 30E/360: 31-е число заменяется на 30-е.
+        function germanDays(start, end) {
+            return 360 * (end.getUTCFullYear() - start.getUTCFullYear()) +
+                30 * (end.getUTCMonth() - start.getUTCMonth()) +
+                Math.min(end.getUTCDate(), 30) - Math.min(start.getUTCDate(), 30);
+        }
+        // ACT/ACT: доли каждого календарного года суммируются.
+        function englishFraction(start, end) {
+            let current = start, fraction = 0;
+            while (current < end) {
+                const year = current.getUTCFullYear();
+                const nextYear = new Date(Date.UTC(year + 1, 0, 1));
+                const periodEnd = end < nextYear ? end : nextYear;
+                fraction += actualDays(current, periodEnd) / (leap(year) ? 366 : 365);
+                current = periodEnd;
+            }
+            return fraction;
+        }
+        function addTenYears(date) {
+            const year = date.getUTCFullYear() + 10, month = date.getUTCMonth();
+            const last = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+            return new Date(Date.UTC(year, month, Math.min(date.getUTCDate(), last)));
+        }
+        function money(value) {
+            return value.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' ₽';
+        }
+        function showError(message) {
+            const result = document.getElementById('res-s');
+            result.textContent = message;
+            result.style.color = '#f7768e';
+            result.style.fontSize = '1.1em';
+            ['res-p', 'res-i', 'res-actual-days', 'res-practice-days', 'res-n'].forEach(id => { document.getElementById(id).textContent = '—'; });
+            document.getElementById('res-progress').style.width = '0%';
+        }
+        function calculateCredit() {
+            try {
+                const value = id => document.getElementById(id).value;
+                const pValue = value('calc-p'), rateValue = value('calc-i');
+                const P = Number(pValue), rate = Number(rateValue);
+                if (pValue === '' || rateValue === '' || !Number.isFinite(P) || !Number.isFinite(rate) || P <= 0 || rate < 0) throw new Error('Проверьте сумму и ставку');
+                const start = parseDate(value('calc-start')), end = parseDate(value('calc-end'));
+                const days = actualDays(start, end);
+                if (days < 30) throw new Error('Минимальный срок — 30 дней');
+                if (end > addTenYears(start)) throw new Error('Максимальный срок — 10 лет');
+                const practice = value('calc-practice'), type = value('calc-type');
+                let practiceDays, n;
+                if (practice === '30E/360') { practiceDays = germanDays(start, end); n = practiceDays / 360; }
+                else if (practice === 'ACT/360') { practiceDays = days; n = days / 360; }
+                else if (practice === 'ACT/ACT') { practiceDays = days; n = englishFraction(start, end); }
+                else throw new Error('Неизвестная практика');
+                const i = rate / 100;
+                let S;
+                if (type === 'simple') S = P * (1 + i * n);
+                else if (type === 'compound') S = P * Math.pow(1 + i, n);
+                else throw new Error('Неизвестный вид процентов');
+                if (!Number.isFinite(S)) throw new Error('Слишком большое значение');
+                const result = document.getElementById('res-s');
+                result.style.color = '#7dcfff'; result.style.fontSize = '1.6em';
+                result.textContent = money(S);
+                document.getElementById('res-p').textContent = money(P);
+                document.getElementById('res-i').textContent = money(S - P);
+                document.getElementById('res-actual-days').textContent = days;
+                document.getElementById('res-practice-days').textContent = practiceDays;
+                document.getElementById('res-n').textContent = n.toFixed(6);
+                document.getElementById('res-progress').style.width = (S > 0 ? P / S * 100 : 0) + '%';
+            } catch (error) { showError(error.message); }
+        }
+        document.querySelectorAll('.loan-inputs input, .loan-inputs select').forEach(element => {
+            element.addEventListener('input', calculateCredit);
+            element.addEventListener('change', calculateCredit);
+        });
+        calculateCredit();
+    </script>
+</body>
+</html>
